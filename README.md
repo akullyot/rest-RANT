@@ -1,2 +1,3 @@
 # rest-RANT
-A restaurant reviewing app serving as a practice in writing express apps. 
+
+rest-Rant is an app in which users can review restauraunts.
