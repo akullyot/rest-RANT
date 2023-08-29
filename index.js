@@ -10,6 +10,9 @@ app.get('/', (request,response) =>
     response.send('Hello World')
 });
 
+//Purpose: routes over to places
+app.use('/places', require('./controllers/places'))
+
 //Purpose: Catch all Page
 app.get('*', (request,response) =>
 {
