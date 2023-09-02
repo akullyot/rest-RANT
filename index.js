@@ -1,13 +1,20 @@
-//Initalize express and include environment variables
+//SECTION - Initializations
+//Initalize the express framework and include environment variables
 require('dotenv').config();
 const express = require('express');
 const app     = express();
 
+//Intialize jsx and react-express-views as the view engine
+app.set('view engine', 'jsx');
+app.engine('jsx', require('express-react-views').createEngine());
 
+
+//SECTION - Routes
 //Purpose: Homepage
 app.get('/', (request,response) =>
 {
-    response.send('Hello World')
+    //pass the name of the .jsx file you wish to work with
+    response.render('home')
 });
 
 //Purpose: routes over to places
