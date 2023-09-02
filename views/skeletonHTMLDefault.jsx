@@ -13,8 +13,8 @@ function GenerateSkeletonHtml (html)
                 <title> {html.title} </title>
             </head>
             <body>
-                <nav id = "TopNav">
-                    
+                <nav id = "topNav">
+
                 </nav>
                 {html.children}
             </body>
