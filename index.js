@@ -8,8 +8,11 @@ const app     = express();
 app.set('view engine', 'jsx');
 app.engine('jsx', require('express-react-views').createEngine());
 
+//Initialize a public folder
+app.use(express.static('public'));
 
 //SECTION - Routes
+//STATIC ROUTES
 //Purpose: Homepage
 app.get('/', (request,response) =>
 {
@@ -17,13 +20,18 @@ app.get('/', (request,response) =>
     response.render('home')
 });
 
+//DYNAMIC ROUTES
 //Purpose: routes over to places
 app.use('/places', require('./controllers/places'))
 
-//Purpose: Catch all Page
+//CATCHALL ROUTE
+//Purpose: Catch all Page for 404 errrors
 app.get('*', (request,response) =>
 {
     //chain together the sent HTML and the HTTP status
     response.status(404).render('error404');
 })
+
+
+//Start website
 app.listen(process.env.PORT)
