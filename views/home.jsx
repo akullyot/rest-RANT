@@ -8,84 +8,85 @@ const GenerateSkeletonHtml = require('./skeletonHTMLDefault.jsx');
 //Purpose: Generate the html.children of the homepage
 function generateHomeChildrenHTML()
 {
+    let pictureDirectory = "/assets/homePage/";
     return(
         <GenerateSkeletonHtml>
             <main>
                 <div id="photoCollage">
-                    <div id = "row1" class = "row">
+                    <div id = "row1" className = "homeRow">
                         <div class = "item">
-                            <img src = '\assets\whiteCake.jpg'></img>
+                            <img src ={pictureDirectory +'whiteCake.jpg'}></img>
                             <div class = "itemDetails">
                                 Scrumptious  Cake
                             </div>
                         </div>
                         <div class = "item">
-                            <img src = '\assets\whiteEggToast.jpg'></img>
+                            <img src = {pictureDirectory +'whiteEggToast.jpg'}></img>
                             <div class = "itemDetails">
                                 perfect breakfast
                             </div>
                         </div>
                         <div class = "item">
-                            <img src = '\assets\whiteFruitBowl.jpg'></img>
+                            <img src = {pictureDirectory +'whiteFruitBowl.jpg'}></img>
                             <div class = "itemDetails">
                                 refreshing salsa
                             </div>
                         </div>
                         <div class = "item">
-                            <img src = '\assets\whiteLatte.jpg'></img>
+                            <img src = {pictureDirectory +'whiteLatte.jpg'}></img>
                             <div class = "itemDetails">
                                 delicious latte
                             </div>
                         </div>
                         <div class = "item">
-                            <img src = '\assets\whitePancake.jpg'></img>
+                            <img src = {pictureDirectory +'whitePancake.jpg'}></img>
                             <div class = "itemDetails">
                                 whimsical pancake
                             </div>
                         </div>
                         <div class = "item">
-                            <img src = '\assets\whitePearBowl.jpg'></img>
+                            <img src = {pictureDirectory +'whitePearBowl.jpg'}></img>
                             <div class = "itemDetails">
                                 unique salad
                             </div>
                         </div>
                     </div>
-                    <div id= "row2" class = "row"> 
+                    <div id= "row2" className = "homeRow"> 
                         <h1>Welcome to Rest-RANT, a restaurant reviewing service</h1>
                     </div>
-                    <div id = "row3" class = "row">
+                    <div id = "row3" className = "homeRow">
                         <div class = "item">
-                            <img src = '\assets\whitePokeBowl.jpg'></img>
+                            <img src = {pictureDirectory +'whitePokeBowl.jpg'}></img>
                             <div class = "itemDetails">
                                 colorful poke
                             </div>
                         </div>
                         <div class = "item">    
-                            <img src = '\assets\whiteSalad.jpg'></img>
+                            <img src = {pictureDirectory +'whiteSalad.jpg'}></img>
                             <div class = "itemDetails">
                                 sublime salad
                             </div>
                         </div>
                         <div class = "item">
-                            <img src = '\assets\whiteSalmon.jpg'></img>
+                            <img src = {pictureDirectory +'whiteSalmon.jpg'}></img>
                             <div class = "itemDetails">
                                 perfect salmon
                             </div>
                         </div>
                         <div class = "item">
-                            <img src = '\assets\whiteCake.jpg'></img>
+                            <img src = {pictureDirectory +'whiteCake.jpg'}></img>
                             <div class = "itemDetails">
                                 scrumptious cake 
                             </div>
                         </div>
                         <div class = "item">
-                            <img src = '\assets\whiteSalmonBowl.jpg'></img>
+                            <img src = {pictureDirectory +'whiteSalmonBowl.jpg'}></img>
                             <div class = "itemDetails">
                                 rainbow bowl
                             </div>
                         </div>
                         <div class = "item">
-                            <img src = '\assets\whiteTart.jpg'></img>
+                            <img src = {pictureDirectory +'whiteTart.jpg'}></img>
                             <div class = "itemDetails">
                                 refreshing tart
                             </div>

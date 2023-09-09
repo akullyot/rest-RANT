@@ -24,7 +24,7 @@
   align-items: flex-start;
   counter-reset: item;
 }
-#photoCollage .row
+#photoCollage .homeRow
 {
   display: flex;
   flex-direction: row;
@@ -42,7 +42,7 @@
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
   padding: 5px 10px;
 }
-.row img
+.item img
 {
   width: 100%;
   height: 200px;
@@ -62,7 +62,7 @@
 }
   .itemDetails:before 
   {
-    counter-increment: item ;
+    counter-increment: item;
     content: counter(item);
     font-weight: bold;
     font-size: 1.1rem;

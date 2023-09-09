@@ -6,7 +6,9 @@ const React = require('react');
 const GenerateSkeletonHtml = require('../skeletonHTMLDefault.jsx');
 
 //Purpose: Generate the html.children of the homepage
-function generatePlacesIndex(data)
+//Arguments: data => all the place information
+//           title =>  
+function generatePlacesIndex(data, title)
 {
     //First, make the HTML for each place 
     let placesArrayHTML = data.placesInfoArray.map((place) => 
