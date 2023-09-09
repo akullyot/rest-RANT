@@ -4,6 +4,7 @@ const { request }  = require('http')
 const router          = require('express').Router();
 //Purpose: holds mock data that will later be placed in a db
 const placesInfoArray = require('../models/places.js');
+const places = require('../models/places.js');
 
 //directory in the views folder for redirecting
 const placesDir = "places/";
@@ -11,9 +12,12 @@ const placesDir = "places/";
 //STATIC ROUTES
 router.get('/', (request, response) => 
 {
+    response.render(placesDir + 'index', 
+    { 
+      placesInfoArray,
 
-      
-    response.render(placesDir + 'index', { placesInfoArray })
+    },
+    )
 });
 router.post('/', (request,response) =>
 {
@@ -41,14 +45,27 @@ router.get('/new', (request,response) =>
 
 
 //DYNAMIC ROUTES
-router.get('/:placeName', (request,response) =>
+router.get('/:id', (request,response) =>
 {
-
+  const placesInfoArrayIndexes = Array.from({ length : placesInfoArray.length}, (value, index) => index);
+  if (placesInfoArrayIndexes.includes(parseInt(request.params.id)))   
+  {
+      response.render(placesDir + 'showPlace',
+      {
+          place: placesInfoArray[request.params.id]
+      });
+  }
+  else
+  {
+      //redirect to the error page 
+      response.status(404).render('error404');
+  }
 });
 
 
-router.get(':placeName/editPlace', (request,response) =>
+router.get(':placeIndex/editPlace', (request,response) =>
 {
+  
 
 })
 

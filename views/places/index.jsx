@@ -7,19 +7,19 @@ const GenerateSkeletonHtml = require('../skeletonHTMLDefault.jsx');
 
 //Purpose: Generate the html.children of the homepage
 //Arguments: data => all the place information
-//           title =>  
-function generatePlacesIndex(data, title)
+function generatePlacesIndex(data)
 {
     //First, make the HTML for each place 
-    let placesArrayHTML = data.placesInfoArray.map((place) => 
+    let placesArrayHTML = data.placesInfoArray.map((place,index) => 
     {
         return(
             //create the relevant HTML for each place, which can then be substituted in below
             <div className='col-sm-6 indexGrid' id = {place.name + 'Div'}>
                 <h2>{place.name}</h2>
                 <p className='text-center'> {place.cusines}</p>
-                <img class = "indexPic" src= {place.pic} alt= {place.name + "Image"} />
+                <img className = "indexPic" src= {place.pic} alt= {place.name + "Image"} />
                 <p className='text-center'> Located in {place.city}, {place.state}</p>
+                <a href = {"/places/" + index}> View {place.name}</a>
             </div>
         )
     }) 
