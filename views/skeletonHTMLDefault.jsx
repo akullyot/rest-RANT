@@ -13,11 +13,28 @@ function GenerateSkeletonHtml (html)
                 <title> {html.title} </title>
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>
                 <link rel = 'stylesheet' href = '/css/main.css' ></link>
+                <link rel = 'stylesheet' href = '/css/topNav.css' ></link>
+
             </head>
             <body>
                 <nav id = "topNav">
-                    <img src= "\assets\logo.svg"></img>
-                    <span> rest-RANT</span>
+                    <div id = "LHS">
+                        <img src= "\assets\logo.svg"></img>
+                        <span> rest-RANT</span>
+                    </div>
+                    <div id = "RHS">
+                        <ul>
+                            <li>
+                                <a href = "/"> Home </a>
+                            </li>
+                            <li>
+                                <a href = "/places"> All Restaurants </a>
+                            </li>                        
+                            <li>
+                                <a href = "/places/new"> Add a Restaurant </a>
+                            </li>
+                        </ul>
+                    </div>
                 </nav>
                 {html.children}
             </body>
