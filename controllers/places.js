@@ -6,6 +6,7 @@ const router = require('express').Router()
 //directory in the views folder for redirecting
 const placesDir = "places/";
 
+//STATIC ROUTES
 router.get('/', (request, response) => 
 {
     //generate Mock Data
@@ -29,11 +30,18 @@ router.get('/', (request, response) =>
     response.render(placesDir + 'index', { placesInfoArray })
 });
 
-router.get('/newPlace', (request,response) => 
+router.get('/new', (request,response) => 
+{
+    response.render(placesDir + 'newPlace')
+
+});
+router.post('/new', (request,response) =>
 {
 
-})
+});
 
+
+//DYNAMIC ROUTES
 router.get('/:placeName', (request,response) =>
 {
 
