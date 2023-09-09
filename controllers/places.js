@@ -1,7 +1,9 @@
 const { response } = require('express')
-const { request } = require('http')
+const { request }  = require('http')
 
-const router = require('express').Router()
+const router          = require('express').Router();
+//Purpose: holds mock data that will later be placed in a db
+const placesInfoArray = require('../models/places.js');
 
 //directory in the views folder for redirecting
 const placesDir = "places/";
@@ -9,36 +11,33 @@ const placesDir = "places/";
 //STATIC ROUTES
 router.get('/', (request, response) => 
 {
-    //generate Mock Data
-    let placesInfoArray = 
-    [
-        {
-            name    : 'H-Thai-ML',
-            city    : 'Seattle',
-            state   : 'WA',
-            cuisines: 'Thai, Pan-Asian',
-            pic     : "/assets/restaurantPics/hthaiml.jpg"
-       },
-       {
-            name    : 'Coding Cat Cafe',
-            city    : 'Phoenix',
-            state   : 'AZ',
-            cuisines: 'Coffee, Bakery',
-            pic     : "/assets/restaurantPics/codingCat.jpg"
-      }]
+
       
     response.render(placesDir + 'index', { placesInfoArray })
 });
+router.post('/', (request,response) =>
+{
+        if (!request.body.pic) {
+          // Default image if one is not provided
+          request.body.pic = 'http://placekitten.com/400/400'
+        }
+        if (!request.body.city) {
+          request.body.city = 'Anytown'
+        }
+        if (!request.body.state) {
+          request.body.state = 'USA'
+        }
+        //push the data into your models
+        placesInfoArray.push(request.body);
+        response.redirect('/places');  
+});
+
 
 router.get('/new', (request,response) => 
 {
     response.render(placesDir + 'newPlace')
-
 });
-router.post('/new', (request,response) =>
-{
 
-});
 
 
 //DYNAMIC ROUTES

@@ -11,6 +11,10 @@ app.engine('jsx', require('express-react-views').createEngine());
 //Initialize a public folder
 app.use(express.static('public'));
 
+//Initialize a body parser
+app.use(express.urlencoded({ extended: true }))
+
+
 //SECTION - Routes
 //STATIC ROUTES
 //Purpose: Homepage
