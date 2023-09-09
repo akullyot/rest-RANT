@@ -16,14 +16,14 @@ router.get('/', (request, response) =>
             city    : 'Seattle',
             state   : 'WA',
             cuisines: 'Thai, Pan-Asian',
-            pic     : 'http://placekitten.com/250/250'
+            pic     : "/assets/restaurantPics/hthaiml.jpg"
        },
        {
             name    : 'Coding Cat Cafe',
             city    : 'Phoenix',
             state   : 'AZ',
             cuisines: 'Coffee, Bakery',
-            pic     : 'http://placekitten.com/250/250'
+            pic     : "/assets/restaurantPics/codingCat.jpg"
       }]
       
     response.render(placesDir + 'index', { placesInfoArray })

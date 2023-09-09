@@ -11,7 +11,9 @@ function generateError404Children()
         <GenerateSkeletonHtml>
         <main>
             <h1> Error 404: Page Not Found</h1>
+            <img src = 'assets/error404.jpg' id = "errorImage"></img>
             <p> Oops, sorry, this page does not seem to exist! Please Press back or use the home bar to choose a different path</p>
+
         </main>
         </GenerateSkeletonHtml>
     );

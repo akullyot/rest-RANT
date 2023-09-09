@@ -16,7 +16,7 @@ function GenerateSkeletonHtml (html)
             </head>
             <body>
                 <nav id = "topNav">
-                    <svg src= "/logo.svg"></svg>
+                    <img src= "\assets\logo.svg"></img>
                     <span> rest-RANT</span>
                 </nav>
                 {html.children}

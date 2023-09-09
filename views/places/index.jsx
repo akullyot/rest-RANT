@@ -13,20 +13,24 @@ function generatePlacesIndex(data)
     {
         return(
             //create the relevant HTML for each place, which can then be substituted in below
-            <div id = {place.name + 'Div'}>
+            <div className='col-sm-6 indexGrid' id = {place.name + 'Div'}>
                 <h2>{place.name}</h2>
-                <img src= {place.pic} alt= {place.name + "Image"} />
+                <p className='text-center'> {place.cusines}</p>
+                <img class = "indexPic" src= {place.pic} alt= {place.name + "Image"} />
+                <p className='text-center'> Located in {place.city}, {place.state}</p>
             </div>
         )
     }) 
     return(
         <GenerateSkeletonHtml>
             <main>
-                <h1>
-                    List of all places reviewed by REST-rant:
+                <h1 class= "noAnimation">
+                    Index of all potential places to rant or rave about
                 </h1>
                 <section id = "placesGrid">
-                    {placesArrayHTML}
+                    <div className='row'>
+                        {placesArrayHTML}
+                    </div>
                 </section>
             </main>
         </GenerateSkeletonHtml>
