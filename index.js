@@ -1,8 +1,9 @@
 //SECTION - Initializations
 //Initalize the express framework and include environment variables
 require('dotenv').config();
-const express = require('express');
-const app     = express();
+const methodOverride = require('method-override');
+const express        = require('express');
+const app            = express();
 
 //Intialize jsx and react-express-views as the view engine
 app.set('view engine', 'jsx');
@@ -12,7 +13,8 @@ app.engine('jsx', require('express-react-views').createEngine());
 app.use(express.static('public'));
 
 //Initialize a body parser
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
 
 
 //SECTION - Routes
@@ -21,7 +23,11 @@ app.use(express.urlencoded({ extended: true }))
 app.get('/', (request,response) =>
 {
     //pass the name of the .jsx file you wish to work with
-    response.render('home')
+    response.render('home',
+    {
+        title     : 'Rest-RANT:Home',
+        customCSS : '' 
+    });
 });
 
 //DYNAMIC ROUTES
@@ -37,5 +43,6 @@ app.get('*', (request,response) =>
 })
 
 
+//SECTION Listen
 //Start website
-app.listen(process.env.PORT)
+app.listen(process.env.PORT, console.log(`listening on ${process.env.PORT}`))

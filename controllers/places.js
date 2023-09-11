@@ -1,7 +1,6 @@
-const { response } = require('express')
-const { request }  = require('http')
-
-const router          = require('express').Router();
+const { response } = require('express');
+const { request }  = require('http');
+const router       = require('express').Router();
 //Purpose: holds mock data that will later be placed in a db
 const placesInfoArray = require('../models/places.js');
 const places = require('../models/places.js');
@@ -15,7 +14,10 @@ router.get('/', (request, response) =>
     response.render(placesDir + 'index', 
     { 
       placesInfoArray,
-
+      skeletonData: {
+                      title     : 'Rest-RANT:Places',
+                      customCSS : ''
+                    }
     },
     )
 });
@@ -52,7 +54,13 @@ router.get('/:id', (request,response) =>
   {
       response.render(placesDir + 'showPlace',
       {
-          place: placesInfoArray[request.params.id]
+          place       : placesInfoArray[request.params.id],
+          skeletonData: 
+                        {
+                            title     : `RestRant: ` + placesInfoArray[request.params.id].name,
+                            customCSS : ''
+                        },
+          id          : request.params.id
       });
   }
   else
@@ -61,6 +69,25 @@ router.get('/:id', (request,response) =>
       response.status(404).render('error404');
   }
 });
+
+router.delete('/:id', (request, response) => 
+{
+  let id = Number(request.params.id)
+  if (isNaN(id)) 
+  {
+    response.render('error404')
+  }
+  else if (!placesInfoArray[id]) 
+  {
+    response.render('error404')
+  }
+  else 
+  {
+    placesInfoArray.splice(id, 1)
+    response.redirect('/places')
+  }
+});
+
 
 
 router.get(':placeIndex/editPlace', (request,response) =>

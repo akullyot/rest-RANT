@@ -24,9 +24,9 @@ function generatePlacesIndex(data)
         )
     }) 
     return(
-        <GenerateSkeletonHtml>
+        <GenerateSkeletonHtml information = {data.skeletonData} >
             <main>
-                <h1 class= "noAnimation">
+                <h1 className= "noAnimation">
                     Index of all potential places to rant or rave about
                 </h1>
                 <section id = "placesGrid">

@@ -5,12 +5,43 @@ const React = require('react');
 //Note: React components must be PascalCase
 const GenerateSkeletonHtml = require('../skeletonHTMLDefault.jsx');
 
-function generateShowPage (place) {
+function generateShowPage (data) {
     return (
-        <GenerateSkeletonHtml>
+        <GenerateSkeletonHtml  information = {data.skeletonData}>
           <main>
-            <h1 className='noAnimation'>Show Page</h1>
-            
+            <h1 className='noAnimation'> {data.place.name}</h1>
+            <section id = "descriptionSection">
+            <div id = "LHSDescription">
+                  <img id = "placeImage" src = {data.place.pic} alt = {data.place.name}></img>
+              </div>
+              <div id = "RHSDescription">
+                <h2> Rating </h2>
+                <p> Currently not rated</p>
+                <h2> Description</h2>
+                <ul>
+                  <li> <p> Located in {data.place.city}, {data.place.state}</p></li>
+                  <li> <p> Cusine styles include : {data.place.cuisines}</p></li>
+                </ul>
+                <a href={`/places/${data.id}/edit`} className="btn btn-warning"> 
+                    Edit
+                </a>
+                <form method="POST" action={`/places/${data.id}?_method=DELETE`}> 
+                  <button type="submit" className="btn btn-danger">
+                    Delete
+                  </button>
+                </form> 
+     
+
+              </div>
+            </section>
+            <section id = "commentsSection">
+              <h2> Comments Section </h2>
+              <section id = "commentSubSection">
+                  <div className='comment'>
+                      <p> No comments yet!</p>
+                  </div>
+              </section>
+            </section>
           </main>
         </GenerateSkeletonHtml>
     )
