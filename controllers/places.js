@@ -41,12 +41,22 @@ router.post('/', (request,response) =>
 
 router.get('/new', (request,response) => 
 {
-    response.render(placesDir + 'newPlace')
+    response.render(placesDir + 'newPlace',
+    {
+      skeletonData: 
+      {
+          title     : `RestRant: New Restauraunt`,
+          customCSS : ''
+      }
+    }
+    )
 });
 
 
 
 //DYNAMIC ROUTES
+
+
 router.get('/:id', (request,response) =>
 {
   const placesInfoArrayIndexes = Array.from({ length : placesInfoArray.length}, (value, index) => index);
@@ -88,13 +98,59 @@ router.delete('/:id', (request, response) =>
   }
 });
 
+router.put('/:id', (request,response) => {
+  const placesInfoArrayIndexes = Array.from({ length : placesInfoArray.length}, (value, index) => index);
+  if (placesInfoArrayIndexes.includes(parseInt(request.params.id)))   
+  {
+    if (!request.body.pic) {
+      // Default image if one is not provided
+      request.body.pic = 'http://placekitten.com/400/400'
+    }
+    if (!request.body.city) {
+      request.body.city = 'Anytown'
+    }
+    if (!request.body.state) {
+      request.body.state = 'USA'
+    }
+    //push the data into your models
+    placesInfoArray[request.params.id] = request.body;
+    response.redirect(`/places/${request.params.id}`);  
+  }
+  else
+  {
+      //redirect to the error page 
+      response.status(404).render('error404');
+  }
 
+});
 
-router.get(':placeIndex/editPlace', (request,response) =>
+router.get('/:id/edit', (request,response) =>
 {
-  
+  const placesInfoArrayIndexes = Array.from({ length : placesInfoArray.length}, (value, index) => index);
+  if (placesInfoArrayIndexes.includes(parseInt(request.params.id)))   
+  {
+      response.render(placesDir + 'editPlace', 
+      {
+        place : placesInfoArray[request.params.id],
+        skeletonData: 
+        {
+            title     : `RestRant: Edit ` + placesInfoArray[request.params.id].name,
+            customCSS : ''
+        },
+        id: request.params.id
+      });
+  }
+  else
+  {
+      //redirect to the error page 
+      response.status(404).render('error404');
+  }
+});
 
-})
+
+
+
+
 
 module.exports = router
 

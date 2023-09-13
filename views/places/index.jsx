@@ -34,6 +34,7 @@ function generatePlacesIndex(data)
                         {placesArrayHTML}
                     </div>
                 </section>
+                
             </main>
         </GenerateSkeletonHtml>
     );

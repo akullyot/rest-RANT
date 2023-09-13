@@ -6,13 +6,13 @@ const React = require('react');
 const GenerateSkeletonHtml = require('../skeletonHTMLDefault.jsx');
 
 //Purpose: Generate the html.children of the homepage
-function generateNewPlaceForm()
+function generateNewPlaceForm(data)
 {
 
     return(
-        <GenerateSkeletonHtml>
+        <GenerateSkeletonHtml information = {data.skeletonData}>
             <main>
-                <h1 class= "noAnimation">
+                <h1 className= "noAnimation">
                    Create a new Restaurant 
                 </h1>
                 <form method="POST" action="/places">
