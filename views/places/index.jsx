@@ -10,7 +10,7 @@ const GenerateSkeletonHtml = require('../skeletonHTMLDefault.jsx');
 function generatePlacesIndex(data)
 {
     //First, make the HTML for each place 
-    let placesArrayHTML = data.placesInfoArray.map((place,index) => 
+    let placesListHTML = data.foundPlaces.map((place) => 
     {
         return(
             //create the relevant HTML for each place, which can then be substituted in below
@@ -19,7 +19,7 @@ function generatePlacesIndex(data)
                 <p className='text-center'> {place.cusines}</p>
                 <img className = "indexPic" src= {place.pic} alt= {place.name + "Image"} />
                 <p className='text-center'> Located in {place.city}, {place.state}</p>
-                <a href = {"/places/" + index}> View {place.name}</a>
+                <a href = {"/places/" + place.id}> View {place.name}</a>
             </div>
         )
     }) 
@@ -31,7 +31,7 @@ function generatePlacesIndex(data)
                 </h1>
                 <section id = "placesGrid">
                     <div className='row'>
-                        {placesArrayHTML}
+                        {placesListHTML}
                     </div>
                 </section>
                 

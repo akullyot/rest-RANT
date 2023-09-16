@@ -10,12 +10,12 @@ function GenerateSkeletonHtml (html)
     return(
         <html>
             <head>
-                <title> {html.information.title} </title>
+                <title> Deafault </title>
                 <link rel= "stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossOrigin="anonymous"></link>
                 <link rel = 'stylesheet' href = '/css/main.css' ></link>
                 <link rel = 'stylesheet' href = '/css/topNav.css' ></link>
                 <link rel = 'stylesheet' href = '/css/footer.css'></link>
-                {html.information.customCSS}
+                {/* html.information.customCSS */}
             </head>
             <body>
                 <nav id = "topNav">
