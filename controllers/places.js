@@ -29,14 +29,32 @@ router.get('/', (request, response) =>
 //Purpose: Add a new place
 router.post('/', (request,response) =>
 {
+  //NOTE: the defaults arent working unless you make it undefined
+  if (request.body.pic == "")
+  {
+     request.body.pic = undefined;
+  }
+  if (request.body.city == "")
+  {
+     request.body.city = undefined;
+  }
+  if (request.body.state == "")
+  {
+     request.body.state = undefined;
+  }
+
    database.Place.create(request.body).then((createdPlace) => 
     {
       response.redirect('/places');  
     }).catch (err => {
       console.log('error:' + err);
-      response.render('error404')
-    })
-   
+      response.render('error404' ,{ skeletonData: 
+                                    {
+                                      title     : 'Rest-RANT:Places',
+                                      customCSS : ''
+                                    }
+      });
+    });
 });
 
 //Purpose: Form for inputting a new restaruant 
@@ -88,7 +106,6 @@ router.get('/:id', (request,response) =>
                             title     : `RestRant: ` + foundPlace.name,
                             customCSS : ''
                         },
-          id          : foundPlace.id
       });
     })
     .catch(err => {
@@ -115,11 +132,15 @@ router.put('/:id', (request,response) => {
     database.Place.findByIdAndUpdate(request.params.id, request.body, { new: true }) 
     .then(updatedPlace => {
       response.redirect(`/places/${request.params.id}`) 
-    })
-    .catch(err => 
-    {
-      response.send('<h1> There was an  error when attempting editing this entry. please try again. </h1>');
-    }); 
+    }).catch (err => {
+    console.log('error:' + err);
+    response.render('error404' ,{ skeletonData: 
+                                  {
+                                    title     : 'Rest-RANT:Places',
+                                    customCSS : ''
+                                  }
+    });
+  });
 });
 //Purpose: Display an edit Place Form
 router.get('/:id/edit', (request,response) =>

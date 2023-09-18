@@ -3,19 +3,18 @@ const mongoose = require('mongoose');
 //Purpose: Shorthand for the Schema constructor
 const {Schema} = mongoose;
 //Purpose: Define our collection and create validation rules
-const placeSchema = new Schema(
-  {
-      name    : { type: String, required: true },
-      pic     : { type: String, default: 'http://placehold.it/500x500.png'},
-      cuisines: { type: String, required: true },
-      city    : { type: String, default: 'Anytown' },
-      state   : { type: String, default: 'USA' },
-      founded : { type: Number, 
-                  min: [1673, 'Surely not that old?!'],
-                  max: [new Date().getFullYear(), 'Hey, this year is in the future!']
-                }
+const placeSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  pic:  {type: String, default: '/assets/restaurantPics/placeholder.jpg'},
+  cuisines: { type: String, required: true },
+  city: { type: String, default: 'Anytown' },
+  state: { type: String, default: 'USA' },
+  founded: {
+    type: Number,
+    min: [1673, 'Surely not that old?!'],
+    max: [new Date().getFullYear(), 'Hey, this year is in the future!']
   }
-);
+});
 //Purpose: Helper Method 
 placeSchema.methods.showEstablished = function()
 {

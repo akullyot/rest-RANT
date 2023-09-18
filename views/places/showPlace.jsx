@@ -22,11 +22,11 @@ function generateShowPage (data) {
                   <li> <h3> {data.place.showEstablished()}</h3></li>
                   <li> <h4> Cusine styles include : {data.place.cuisines}</h4></li>
                 </ul>
-                <a href={`/places/${data.id}/edit`} className="btn btn-warning"> 
+                <a href={`/places/${data.place.id}/edit`} className="btn btn-warning"> 
                     Edit {data.place.name}
                 </a>
                 <br/>
-                <form method="POST" action={`/places/${data.id}?_method=DELETE`}> 
+                <form method="POST" action={`/places/${data.place.id}?_method=DELETE`}> 
                   <button type="submit" className="btn btn-danger">
                     Delete
                   </button>

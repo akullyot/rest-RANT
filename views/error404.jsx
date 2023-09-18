@@ -5,10 +5,10 @@ const React = require('react');
 //Note: React components must be PascalCase
 const GenerateSkeletonHtml = require('./skeletonHTMLDefault.jsx');
 
-function generateError404Children()
+function generateError404Children(data)
 {
     return(
-        <GenerateSkeletonHtml>
+        <GenerateSkeletonHtml information = {data.skeletonData}>
         <main>
             <h1> Error 404: Page Not Found</h1>
             <img src = 'assets/error404.jpg' id = "errorImage"></img>
