@@ -61,6 +61,21 @@ router.get('/new', (request,response) =>
     }
     )
 });
+//Purpose: Create many new places 
+router.get('/data/seed', (request, response) =>
+{
+    const newPlacesBulkDataArray = require('../seed/placeBulkData.js');
+    Places.insertMany(newPlacesBulkDataArray)
+    .then(createdPlaces => {
+        console.log('Success in adding mock data');
+        response.redirect('/places');
+    })
+    .catch(err => {
+      console.log('Failure in adding mock data :' + err);
+      response.status(404).send('<h1> 404 Page not Found </h1>');
+    })
+}
+)
 
 
 
@@ -90,33 +105,24 @@ router.get('/:id', (request,response) =>
       response.status(404).render('error404');
     })
 });
-
+//Purpose: delete a place from the database
 router.delete('/:id', (request, response) => 
 {
-  let id = Number(request.params.id)
-  if (isNaN(id)) 
+  Places.findByIdAndDelete(request.params.id)
+  .then(deletePlace => 
   {
-    response.render('error404')
-  }
-  else if (!placesInfoArray[id]) 
-  {
-    response.render('error404')
-  }
-  else 
-  {
-    placesInfoArray.splice(id, 1)
-    response.redirect('/places')
-  }
+      response.status(303).redirect('/places');
+  })
 });
 
-//Purpose: 
+//Purpose: Update a places databse information
 router.put('/:id', (request,response) => {
   const placesInfoArrayIndexes = Array.from({ length : placesInfoArray.length}, (value, index) => index);
   if (placesInfoArrayIndexes.includes(parseInt(request.params.id)))   
   {
     if (!request.body.pic) {
       // Default image if one is not provided
-      request.body.pic = 'http://placekitten.com/400/400'
+      request.body.pic = 'http://placehold.it/500x500.png'
     }
     if (!request.body.city) {
       request.body.city = 'Anytown'
@@ -124,39 +130,39 @@ router.put('/:id', (request,response) => {
     if (!request.body.state) {
       request.body.state = 'USA'
     }
-    //push the data into your models
-    placesInfoArray[request.params.id] = request.body;
-    response.redirect(`/places/${request.params.id}`);  
+    Places.findByIdAndUpdate(request.params.id, request.body, { new: true }) 
+    .then(updatedPlace => {
+      response.redirect(`/places/${request.params.id}`) 
+    })
+    .catch(err => {
+      response.send('<h1> There was an  error when attempting editing this entry. please try again. </h1>');
+    }); 
   }
   else
   {
       //redirect to the error page 
       response.status(404).render('error404');
   }
-
 });
-
+//Purpose: Display an edit Place Form
 router.get('/:id/edit', (request,response) =>
 {
-  const placesInfoArrayIndexes = Array.from({ length : placesInfoArray.length}, (value, index) => index);
-  if (placesInfoArrayIndexes.includes(parseInt(request.params.id)))   
+  Places.findById(request.params.id)
+  .then(foundPlace => 
   {
       response.render(placesDir + 'editPlace', 
       {
-        place : placesInfoArray[request.params.id],
-        skeletonData: 
-        {
-            title     : `RestRant: Edit ` + placesInfoArray[request.params.id].name,
-            customCSS : ''
-        },
-        id: request.params.id
+          place        : foundPlace,
+          skeletonData : 
+                        {
+                          title      : 'Edit: ' + foundPlace.name,
+                          pageCSS    : ''
+                        }
       });
-  }
-  else
-  {
-      //redirect to the error page 
-      response.status(404).render('error404');
-  }
+  })
+  .catch(err => {
+    response.status(404).send('<h1> 404 Page not Found </h1>');
+  })
 });
 
 

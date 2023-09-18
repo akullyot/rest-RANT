@@ -10,7 +10,7 @@ const placeSchema = new Schema(
       cuisines: { type: String, required: true },
       city    : { type: String, default: 'Anytown' },
       state   : { type: String, default: 'USA' },
-      founded : Number
+      founded : { type: Number}
   }
 );
 //Purpose: Use said schema to creat a model 

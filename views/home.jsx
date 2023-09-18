@@ -62,9 +62,13 @@ function generateHomeChildrenHTML(data)
                         {generatePhotoCollage('row3')}
                     </div>
                 </section>
+                <br/>
+                <br/>
+                <br/>
                 <section id = "websiteGoal">
                     <h2> Here at Rest-RANT, we provide users a method to explore and review restaurants. </h2>
                 </section>
+                <br/>
                 <section id = "cuisineTypes">
                 </section>
                 <section>

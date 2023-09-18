@@ -1,4 +1,6 @@
-const mongoose = require('mongoose')
+//Purpose: dotenv required so we can use the MONGO_URI var
+require('dotenv').config;
+const mongoose = require('mongoose');
 
 
 //Purpose: Removes some warning messages from the terminal

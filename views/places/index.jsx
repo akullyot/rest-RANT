@@ -19,6 +19,7 @@ function generatePlacesIndex(data)
                 <p className='text-center'> {place.cusines}</p>
                 <img className = "indexPic" src= {place.pic} alt= {place.name + "Image"} />
                 <p className='text-center'> Located in {place.city}, {place.state}</p>
+                <p className='text-cetner'> Founded in: {place.founded}</p>
                 <a href = {"/places/" + place.id}> View {place.name}</a>
             </div>
         )

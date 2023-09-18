@@ -88,6 +88,10 @@ function generateNewPlaceForm(data)
                     <label htmlFor="cuisines">Cuisines</label>
                     <input type= "text" className="form-control" id="cuisines" name="cuisines" required />
                 </div>
+                <div className="form-group">
+                    <label htmlFor="founded">Founded in</label>
+                    <input type= "number" className="form-control" id="founded" name="founded" defaultValue ={data.place.founded}  />
+                </div>
                 <input className="btn btn-primary" type="submit" value="Add Place" />
                 </form>
 

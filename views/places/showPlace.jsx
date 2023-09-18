@@ -20,6 +20,7 @@ function generateShowPage (data) {
                 <h2> Description</h2>
                 <ul>
                   <li> <p> Located in {data.place.city}, {data.place.state}</p></li>
+                  <li> <p> Founded in {data.place.founded}</p></li>
                   <li> <p> Cusine styles include : {data.place.cuisines}</p></li>
                 </ul>
                 <a href={`/places/${data.id}/edit`} className="btn btn-warning"> 
