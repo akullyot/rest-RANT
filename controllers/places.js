@@ -3,7 +3,7 @@ const { response } = require('express');
 const { request }  = require('http');
 const router       = require('express').Router();
 //Load in data from the models
-const Places = require('../models/places.js');
+const database = require('../models');
 
 //directory in the views folder for redirecting, written here for DRY reasons
 const placesDir = "places/";
@@ -12,7 +12,7 @@ const placesDir = "places/";
 //Purpose: List out every restaruant in database
 router.get('/', (request, response) => 
 {
-  Places.find()
+  database.Place.find()
   .then(foundPlaces => 
     {
       //todo: cool idea would be to implement sorting by how nearby a restauraunt is to the user 
@@ -29,23 +29,14 @@ router.get('/', (request, response) =>
 //Purpose: Add a new place
 router.post('/', (request,response) =>
 {
-    //1. Modify data accordingly to match db validations
-        if (!request.body.pic) 
-        {
-          //Note: the database validation adds a placeholder picture
-          request.body.pic = undefined;
-        }
-        if (!request.body.city) 
-        {
-          request.body.city = 'Anytown';
-        }
-        if (!request.body.state) 
-        {
-          request.body.state = 'USA';
-        }
-        //push the data into your models
-        Places.create(request.body);
-        response.redirect('/places');  
+   database.Place.create(request.body).then((createdPlace) => 
+    {
+      response.redirect('/places');  
+    }).catch (err => {
+      console.log('error:' + err);
+      response.render('error404')
+    })
+   
 });
 
 //Purpose: Form for inputting a new restaruant 
@@ -65,7 +56,7 @@ router.get('/new', (request,response) =>
 router.get('/data/seed', (request, response) =>
 {
     const newPlacesBulkDataArray = require('../seed/placeBulkData.js');
-    Places.insertMany(newPlacesBulkDataArray)
+    database.Place.insertMany(newPlacesBulkDataArray)
     .then(createdPlaces => {
         console.log('Success in adding mock data');
         response.redirect('/places');
@@ -86,7 +77,7 @@ router.get('/data/seed', (request, response) =>
 router.get('/:id', (request,response) =>
 {
 
-  Places.findById(request.params.id)
+  database.Place.findById(request.params.id)
   .then(foundPlace =>
     {
       response.render(placesDir + 'showPlace',
@@ -108,46 +99,32 @@ router.get('/:id', (request,response) =>
 //Purpose: delete a place from the database
 router.delete('/:id', (request, response) => 
 {
-  Places.findByIdAndDelete(request.params.id)
+  database.Place.findByIdAndDelete(request.params.id)
   .then(deletePlace => 
   {
       response.status(303).redirect('/places');
   })
+  .catch(err => 
+    {
+      response.send('<h1> There was an  error when attempting editing this entry. please try again. </h1>');
+    }); 
 });
 
 //Purpose: Update a places databse information
 router.put('/:id', (request,response) => {
-  const placesInfoArrayIndexes = Array.from({ length : placesInfoArray.length}, (value, index) => index);
-  if (placesInfoArrayIndexes.includes(parseInt(request.params.id)))   
-  {
-    if (!request.body.pic) {
-      // Default image if one is not provided
-      request.body.pic = 'http://placehold.it/500x500.png'
-    }
-    if (!request.body.city) {
-      request.body.city = 'Anytown'
-    }
-    if (!request.body.state) {
-      request.body.state = 'USA'
-    }
-    Places.findByIdAndUpdate(request.params.id, request.body, { new: true }) 
+    database.Place.findByIdAndUpdate(request.params.id, request.body, { new: true }) 
     .then(updatedPlace => {
       response.redirect(`/places/${request.params.id}`) 
     })
-    .catch(err => {
+    .catch(err => 
+    {
       response.send('<h1> There was an  error when attempting editing this entry. please try again. </h1>');
     }); 
-  }
-  else
-  {
-      //redirect to the error page 
-      response.status(404).render('error404');
-  }
 });
 //Purpose: Display an edit Place Form
 router.get('/:id/edit', (request,response) =>
 {
-  Places.findById(request.params.id)
+  database.Place.findById(request.params.id)
   .then(foundPlace => 
   {
       response.render(placesDir + 'editPlace', 
@@ -170,5 +147,5 @@ router.get('/:id/edit', (request,response) =>
 
 
 
-module.exports = router
+module.exports = router;
 

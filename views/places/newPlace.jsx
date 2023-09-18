@@ -90,7 +90,7 @@ function generateNewPlaceForm(data)
                 </div>
                 <div className="form-group">
                     <label htmlFor="founded">Founded in</label>
-                    <input type= "number" className="form-control" id="founded" name="founded" defaultValue ={data.place.founded}  />
+                    <input type= "number" className="form-control" id="founded" name="founded" defaultValue ={new Date().getFullYear}  />
                 </div>
                 <input className="btn btn-primary" type="submit" value="Add Place" />
                 </form>

@@ -19,9 +19,8 @@ function generateShowPage (data) {
                 <p> Currently not rated</p>
                 <h2> Description</h2>
                 <ul>
-                  <li> <p> Located in {data.place.city}, {data.place.state}</p></li>
-                  <li> <p> Founded in {data.place.founded}</p></li>
-                  <li> <p> Cusine styles include : {data.place.cuisines}</p></li>
+                  <li> <h3> {data.place.showEstablished()}</h3></li>
+                  <li> <h4> Cusine styles include : {data.place.cuisines}</h4></li>
                 </ul>
                 <a href={`/places/${data.id}/edit`} className="btn btn-warning"> 
                     Edit {data.place.name}

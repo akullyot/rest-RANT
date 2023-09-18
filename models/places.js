@@ -10,12 +10,21 @@ const placeSchema = new Schema(
       cuisines: { type: String, required: true },
       city    : { type: String, default: 'Anytown' },
       state   : { type: String, default: 'USA' },
-      founded : { type: Number}
+      founded : { type: Number, 
+                  min: [1673, 'Surely not that old?!'],
+                  max: [new Date().getFullYear(), 'Hey, this year is in the future!']
+                }
   }
 );
-//Purpose: Use said schema to creat a model 
+//Purpose: Helper Method 
+placeSchema.methods.showEstablished = function()
+{
+  return `${this.name} has been serving ${this.city}, ${this.state} since ${this.founded}.`
+};
+//Purpose: Use said schema to create a model 
 const Place = mongoose.model('Place', placeSchema);
 
-
-//Export to make available for importing elsewhere
 module.exports = Place;
+
+
+

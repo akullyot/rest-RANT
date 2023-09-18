@@ -12,7 +12,7 @@ function generatePlacesEditPlace(data)
         <GenerateSkeletonHtml information = {data.skeletonData} >
             <main>
                 <h1 className='noAnimation'> Edit a pre Existing Restauraunt </h1>
-                <form method="POST" action={`/places/${data.id}?_method=PUT`}>
+                <form method="POST" action={`/places/${data.place.id}?_method=PUT`}>
                 <div className="form-group">
                     <label htmlFor="name">Place Name</label>
                     <input type='text' className="form-control" id="name" name="name" defaultValue={data.place.name} required />
