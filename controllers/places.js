@@ -187,6 +187,48 @@ router.get('/:id/edit', (request,response) =>
   })
 });
 
+//Purpose: Insert a comment
+router.post('/:id/comment', (request, response) => {
+
+  request.body.isPositive = request.body.isPositive ? true : false;
+  //Add to the places database the commnet id
+  database.Place.findById(request.params.id)
+  .then(place => 
+    {
+      //first make the comment document
+      database.Comment.create(request.body)
+      .then(comment =>
+      {
+          place.comments.push(comment.id);
+          place.save()
+          .then(() => {
+            response.redirect(`/places/${request.params.id}`)
+          })
+      })
+      .catch(err => 
+      {
+        console.log('error:' + err);
+        response.render('error404' ,{ skeletonData: 
+                                      {
+                                        title     : 'Rest-RANT:Places',
+                                        customCSS : ''
+                                      }
+        });
+      })
+    })
+    .catch(err => 
+    {
+      console.log('error:' + err);
+      response.render('error404' ,{ skeletonData: 
+                                    {
+                                      title     : 'Rest-RANT:Places',
+                                      customCSS : ''
+                                    }
+      });
+    })
+})
+
+
 
 
 
