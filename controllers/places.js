@@ -71,20 +71,41 @@ router.get('/new', (request,response) =>
     )
 });
 //Purpose: Create many new places 
-router.get('/data/seed', (request, response) =>
+router.get('/data/seed', async function (request, response)
 {
+  try 
+  {
     const newPlacesBulkDataArray = require('../seed/placeBulkData.js');
-    database.Place.insertMany(newPlacesBulkDataArray)
-    .then(createdPlaces => {
-        console.log('Success in adding mock data');
-        response.redirect('/places');
-    })
-    .catch(err => {
-      console.log('Failure in adding mock data :' + err);
-      response.status(404).send('<h1> 404 Page not Found </h1>');
-    })
+    await  database.Place.insertMany(newPlacesBulkDataArray);
+    //Including in here comment seeding because it wasnt working in the seperate section
+    // Get the place, H-Thai-ML
+    let place = await database.Place.findOne({ name: 'H-Thai-ML' });
+    //Create a comment
+    let comment = await database.Comment.create({
+        author    : 'Famished Fran',
+        isPositive: true,
+        stars     : 5.0,
+        content   : 'Wow, simply amazing! Highly recommended!'
+    });
+
+    // Add that comment to the place's comment array.
+    place.comments.push(comment.id);
+
+    //save the place now that it has comment
+    await place.save();
+    //Give yourself a console comment
+    console.log(`You have successfully seeded a new comment`);
+    response.redirect('/places');
+  } 
+  catch (err) 
+  {
+    console.log('Failure in adding mock data :' + err);
+    response.status(404).send('<h1> 404 Page not Found </h1>');
+  }
 }
-)
+);
+
+
 
 
 
@@ -96,8 +117,10 @@ router.get('/:id', (request,response) =>
 {
 
   database.Place.findById(request.params.id)
+  .populate('comments')
   .then(foundPlace =>
     {
+      console.log(foundPlace.comments);
       response.render(placesDir + 'showPlace',
       {
           place       : foundPlace,
@@ -108,7 +131,8 @@ router.get('/:id', (request,response) =>
                         },
       });
     })
-    .catch(err => {
+    .catch(err => 
+    {
       //redirect to the error page 
       response.status(404).render('error404');
     })

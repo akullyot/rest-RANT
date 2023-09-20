@@ -6,6 +6,27 @@ const React = require('react');
 const GenerateSkeletonHtml = require('../skeletonHTMLDefault.jsx');
 
 function generateShowPage (data) {
+
+  let comments = (
+    <h3 className="inactive">
+      No comments yet!
+    </h3>
+  )
+  if (data.place.comments.length) {
+    comments = data.place.comments.map(comment => {
+      return (
+        <div className="border">
+          <h2 className="rant">{comment.isPositive ? 'Rant! ðŸ˜¡' : 'Rave! ðŸ˜»'}</h2>
+          <h4>{comment.content}</h4>
+          <h3>
+            <stong>- {comment.author}</stong>
+          </h3>
+          <h4>Rating: {comment.stars}</h4>
+        </div>
+      )
+    })
+  }
+
     return (
         <GenerateSkeletonHtml  information = {data.skeletonData}>
           <main>
@@ -38,9 +59,7 @@ function generateShowPage (data) {
             <section id = "commentsSection">
               <h2> Comments Section </h2>
               <section id = "commentSubSection">
-                  <div className='comment'>
-                      <p> No comments yet!</p>
-                  </div>
+                    {comments}
               </section>
             </section>
           </main>

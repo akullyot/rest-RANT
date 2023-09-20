@@ -13,7 +13,9 @@ const placeSchema = new mongoose.Schema({
     type: Number,
     min: [1673, 'Surely not that old?!'],
     max: [new Date().getFullYear(), 'Hey, this year is in the future!']
-  }
+  },
+  //Because there can be multiple comments, make this plural
+  comments: [{type: mongoose.Schema.Types.ObjectId, ref:'Comment'}]
 });
 //Purpose: Helper Method 
 placeSchema.methods.showEstablished = function()
