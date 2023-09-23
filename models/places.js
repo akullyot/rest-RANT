@@ -17,11 +17,12 @@ const placeSchema = new mongoose.Schema({
   //Because there can be multiple comments, make this plural
   comments: [{type: mongoose.Schema.Types.ObjectId, ref:'Comment'}]
 });
-//Purpose: Helper Method 
+//Purpose: Helper Method for location and founding information
 placeSchema.methods.showEstablished = function()
 {
   return `${this.name} has been serving ${this.city}, ${this.state} since ${this.founded}.`
 };
+
 //Purpose: Use said schema to create a model 
 const Place = mongoose.model('Place', placeSchema);
 

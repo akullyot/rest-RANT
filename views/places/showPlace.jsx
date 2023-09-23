@@ -22,11 +22,16 @@ function generateShowPage (data) {
     {
       return total + comment.stars
     }, 0)
-    let averageRating = Math.round(sumRatings / data.place.comments.length)
+    let averageRating = Math.round(sumRatings / data.place.comments.length);
+    let stars = ""
+    for (let i = 0; i < averageRating; i++)
+    {
+      stars += '✩'
+    }
     rating = (
-      <h3>
-        {averageRating}  stars
-      </h3>
+      <h1 className = "noAnimation">
+        {stars}
+      </h1>
     )
     comments = data.place.comments.map(comment => {
       return (

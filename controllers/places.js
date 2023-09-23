@@ -147,24 +147,21 @@ router.delete('/:id', (request, response) =>
   })
   .catch(err => 
     {
-      response.send('<h1> There was an  error when attempting editing this entry. please try again. </h1>');
+      response.send('<h1> There was an  error when attempting to delete this entry. please try again. </h1>');
     }); 
 });
 
 //Purpose: Update a places databse information
 router.put('/:id', (request,response) => {
-    database.Place.findByIdAndUpdate(request.params.id, request.body, { new: true }) 
+    database.Place.findByIdAndUpdate(request.params.id, request.body, { new: true, runValidators: true, context: 'query'}) 
     .then(updatedPlace => {
       response.redirect(`/places/${request.params.id}`) 
-    }).catch (err => {
-    console.log('error:' + err);
-    response.render('error404' ,{ skeletonData: 
-                                  {
-                                    title     : 'Rest-RANT:Places',
-                                    customCSS : '/css/placeIndex.css'
-                                  }
+    })
+    .catch (err => 
+    {
+      console.log('error:' + err);
+      response.send('Validation rules failed. Please Try Again.')
     });
-  });
 });
 //Purpose: Display an edit Place Form
 router.get('/:id/edit', (request,response) =>
