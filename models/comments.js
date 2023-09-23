@@ -14,6 +14,11 @@ const commentSchema = new mongoose.Schema({
   //String of the comment content
   content: { type: String, default: '' }
 });
+//Adding in a Hook where if one item here the places will have their cmments wiped of it as well
+// hooks 
+commentSchema.post('findOneAndDelete', function() {
+  
+})            
 
 
 //Purpose: Use said schema to create a model 

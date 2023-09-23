@@ -143,7 +143,9 @@ router.delete('/:id', (request, response) =>
   database.Place.findByIdAndDelete(request.params.id)
   .then(deletePlace => 
   {
+
       response.status(303).redirect('/places');
+      //should be deleting all the comments associated with this place too
   })
   .catch(err => 
     {
@@ -223,11 +225,35 @@ router.post('/:id/comment', (request, response) => {
                                     }
       });
     })
-})
+});
 
 
-
-
+router.delete('/:id/comment/:commentid', async (request,response) =>
+{
+  //have to delete from both the comment db and the place db comment array
+  const foundPlace = await database.Place.findById(request.params.id)
+  for (var i=0; i< foundPlace.comments.length; i++)
+  {
+    if (foundPlace.comments[i].inspect().split(`"`)[1] == request.params.commentid)
+    {
+      //Now delete from both the comments section and the array of objectIds
+              foundPlace.comments.splice(i, 1);
+      try
+      {
+        const updatePlaceOutput = await database.Place.findByIdAndUpdate(request.params.id, {comments : foundPlace.comments }, {new: true});
+        const foundCommentDeletionSuccess = await database.Comment.findByIdAndDelete(request.params.commentid);
+        //foundPlace.save();
+        response. status(303).redirect('/places/' + request.params.id);
+    
+      }
+      catch (err)
+      {
+        console.log(err);
+        response.send("there was an error deleting the comment")
+      }
+    }
+  }
+});
 
 
 

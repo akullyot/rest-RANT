@@ -22,7 +22,21 @@ placeSchema.methods.showEstablished = function()
 {
   return `${this.name} has been serving ${this.city}, ${this.state} since ${this.founded}.`
 };
+//Adding in a Hook where if one item here the places will have their cmments wiped of it as well
+// hooks 
+/*
+placeSchema.post('findOneAndDelete', function() {
+  for(var i= 0 ; i < this._controller.comments.length; i++)
+  {
+    Comment.findByIdAndDelete(this._controller.comments[i])
+    .then(deleteStatus => 
+      {
+        console.log(deleteStatus);
+      })
 
+  }
+});
+*/
 //Purpose: Use said schema to create a model 
 const Place = mongoose.model('Place', placeSchema);
 

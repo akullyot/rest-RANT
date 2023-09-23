@@ -44,6 +44,10 @@ function generateShowPage (data) {
               </h3>
               <h5>Rating: {comment.stars}</h5>
           </div>
+          <form method="POST" action={`/places/${data.place.id}/comment/${comment.id}?_method=DELETE`}>
+            <input type="submit" className="btn btn-danger" value="Delete Comment" />
+          </form>
+          
         </div>
       )
     })
