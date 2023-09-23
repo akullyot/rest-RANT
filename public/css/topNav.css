@@ -1,19 +1,25 @@
 /*Navbar CSS, needs to be moved to a seperate file eventually*/
+@import url('https://fonts.googleapis.com/css?family=Arvo');
+@import url('https://fonts.googleapis.com/css?family=Handlee');
+
 #topNav
 {
     padding: 10px 30px;
     background-color: #eee7d9;
     display: flex;
+    width: 100%;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    position: fixed;
+    top: 0px;
+    z-index: 2;
 }
 #LHS, #RHS
 {
     display: flex;
     flex-direction: row;
     align-items: center;
-
 }
 #topNav img
 {
@@ -25,7 +31,8 @@
 #topNav span
 {
     font-size: 20px;
-    margin-left: 10px;
+    margin-left: 20px;
+    font-family: "Handlee";
 }
 #topNav ul
 {
@@ -44,4 +51,11 @@
     padding: 0px 20px;
     margin: 0px;
     color: black;
+    font-family: "Arvo";
+    text-transform: uppercase;
+}
+main
+{
+    margin-top: 100px;
+    margin-bottom: 40px;
 }

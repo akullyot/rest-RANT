@@ -67,6 +67,7 @@ function generateHomeChildrenHTML(data)
                 <br/>
                 <section id = "websiteGoal">
                     <h2> Here at Rest-RANT, we provide users a method to explore and review restaurants. </h2>
+                    <h3> Simply Select From the Navbar above to browse restaurants, or add a new restaurant for which others can rant or rave about their experiences.</h3>
                 </section>
                 <br/>
                 <section id = "cuisineTypes">

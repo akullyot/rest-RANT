@@ -14,13 +14,14 @@ function generatePlacesIndex(data)
     {
         return(
             //create the relevant HTML for each place, which can then be substituted in below
-            <div className='col-sm-6 indexGrid' id = {place.name + 'Div'}>
+            <div className='indexGrid' id = {place.name + 'Div'}>
                 <h2>{place.name}</h2>
                 <p className='text-center'> {place.cusines}</p>
                 <img className = "indexPic" src= {place.pic} alt= {place.name + "Image"} />
                 <p className='text-center'> Located in {place.city}, {place.state}</p>
                 <p className='text-cetner'> Founded in: {place.founded}</p>
-                <a href = {"/places/" + place.id}> View {place.name}</a>
+                <button className="btn btn-outline-warning"> <a href = {"/places/" + place.id}> View {place.name}</a></button>
+                
             </div>
         )
     }) 

@@ -1,0 +1,47 @@
+#placesGrid
+{
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
+
+
+.indexGrid
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  margin: auto;
+  width: 35%;
+  border: 3px dashed grey;
+  font-family: Arvo;
+  border-radius: 20px;
+
+}
+
+.indexGrid img
+{
+    width: 80%;
+    height: max-content;
+    margin: 20px;
+    border-radius: 20px;
+}
+
+.indexGrid h2
+{
+    text-decoration: underline;
+    text-decoration-color: orange;
+}
+.indexGrid a
+{
+    color: black;
+    text-decoration: underline;
+    text-decoration-color: orange;
+    padding: 20px 10px;
+}

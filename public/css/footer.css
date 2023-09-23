@@ -4,24 +4,26 @@ footer
     flex-direction: row;
     align-items: end;
     justify-content: end;
-    background-color: orange;
+    background-color: #eee7d9;
     width: 100%;
+    font-family: Arvo;
+    padding: 5px;
 }
 footer h5
 {
     padding: 0px 10px;
     margin: 5px;
     font-size: 15px;
-    color: white;
+    color: black;
 }
 footer a
 {
-    color: white;
+    color: black;
     font-size: 15px;
     text-decoration: underline;
 }
 footer a:hover
 {
-    color: bisque;
+    color: grey;
     font-size: 15.5px;
 }

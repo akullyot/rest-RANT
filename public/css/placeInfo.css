@@ -1,0 +1,139 @@
+#descriptionSection
+{
+    width: 90%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border: 3px dashed grey;
+    font-family: Arvo;
+    border-radius: 20px;
+    align-items: flex-start;
+    margin-bottom: 30px;
+}
+
+#placeImage
+{
+    width: 100%;
+    height: fit-content;
+    border-radius: 20px;
+    border: 2px solid grey;
+}
+
+/* Individual places CSS */
+#LHSDescription
+{
+    width: 80%;
+}
+#LHSDescription, #RHSDescription 
+{
+
+  padding: 50px;
+  color:black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+#RHSDescription
+{
+
+    border-left: 2px dashed grey;
+}
+#RHSDescription h2
+{
+  font-family: "Arvo";
+  padding: 20px 0px;
+  text-decoration: underline;
+  text-decoration-color:orange;
+}
+#RHSDescription h3
+{
+  font-family: "Arvo";
+  padding: 20px 0px;
+  font-size: 15px;
+}
+
+#RHSDescription p
+{
+  margin-left: 20px;
+}
+#RHSDescription a
+{
+    color: #fff;
+}
+#RHSDescription form
+{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.descripButton
+{
+    margin: auto;
+    width: 80%;
+    padding: 20px;
+}
+
+
+.titleDivider
+{
+  font-family: "Arvo";
+  padding: 20px 0px;
+  background-color: rgba(255, 166, 0, 0.552);
+  border: 2px solid orange;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 0px;
+}
+
+
+.commentSubSection
+{
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-evenly;
+  padding: 30px;
+  padding-bottom: 100px;
+  margin: 0px;
+}
+
+.comment 
+{
+   max-width: 30%;
+   min-width: 30%;
+   margin: 10px auto;
+   display: flex;
+   flex-direction: column;
+   background-color: #fff;
+   border: 2px dashed #828282;
+}
+#comment h2
+{
+  font-family: "Arvo";
+  padding: 20px 0px;
+  background-color: rgba(255, 166, 0, 0.552);
+  border: 2px solid orange;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 0px;
+}
+.commentContent
+{
+    padding: 10px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#commentsSection h4
+{
+  font-family: "Arvo";
+  padding: 5px 0px;
+  background-color: rgba(255, 166, 0, 0.552);
+  border: 2px solid orange;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 0px;
+}

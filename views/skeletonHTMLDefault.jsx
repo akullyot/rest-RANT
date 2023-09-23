@@ -10,12 +10,12 @@ function GenerateSkeletonHtml (html)
     return(
         <html>
             <head>
-                <title> Rest-RANT {/*{html.information.title  || 'Default'}*/} </title>
+                <title> Rest-RANT {html.information.title  || 'Default'} </title>
                 <link rel= "stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossOrigin="anonymous"></link>
                 <link rel = 'stylesheet' href = '/css/main.css' ></link>
                 <link rel = 'stylesheet' href = '/css/topNav.css' ></link>
                 <link rel = 'stylesheet' href = '/css/footer.css'></link>
-                {/* html.information.customCSS */}
+                <link rel = 'stylesheet' href = {html.information.customCSS}></link>
             </head>
             <body>
                 <nav id = "topNav">
@@ -25,13 +25,13 @@ function GenerateSkeletonHtml (html)
                     </div>
                     <div id = "RHS">
                         <ul>
-                            <li>
+                            <li key ="home">
                                 <a href = "/"> Home </a>
                             </li>
-                            <li>
+                            <li key = "browse">
                                 <a href = "/places"> All Restaurants </a>
                             </li>                        
-                            <li>
+                            <li key = "add">
                                 <a href = "/places/new"> Add a Restaurant </a>
                             </li>
                         </ul>

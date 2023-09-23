@@ -12,16 +12,33 @@ function generateShowPage (data) {
       No comments yet!
     </h3>
   )
+  let rating = (
+    <h5 className = "inactive">
+        Not yet Rated
+    </h5> 
+  )
   if (data.place.comments.length) {
+    let sumRatings = data.place.comments.reduce((total, comment) =>
+    {
+      return total + comment.stars
+    }, 0)
+    let averageRating = Math.round(sumRatings / data.place.comments.length)
+    rating = (
+      <h3>
+        {averageRating}  stars
+      </h3>
+    )
     comments = data.place.comments.map(comment => {
       return (
-        <div className="border">
-          <h2 className="rant">{comment.isPositive ? 'Rant! ðŸ˜¡' : 'Rave! ðŸ˜»'}</h2>
-          <h4>{comment.content}</h4>
-          <h3>
-            <stong>- {comment.author}</stong>
-          </h3>
-          <h4>Rating: {comment.stars}</h4>
+        <div className="comment">
+          <h4 className="rant">{comment.isPositive ? 'Rave!' : 'Rant!'}</h4>
+          <div className='commentContent'> 
+              <h5>{comment.content}</h5>
+              <h3>
+                <stong>- {comment.author}</stong>
+              </h3>
+              <h5>Rating: {comment.stars}</h5>
+          </div>
         </div>
       )
     })
@@ -33,23 +50,26 @@ function generateShowPage (data) {
             <h1 className='noAnimation'> {data.place.name}</h1>
             <section id = "descriptionSection">
             <div id = "LHSDescription">
-                  <img id = "placeImage" src = {data.place.pic} alt = {data.place.name}></img>
+                  <h4> Restauraunt Picture:</h4>
+                  <img id = "placeImage"  src = {data.place.pic} alt = {data.place.name}></img>
               </div>
               <div id = "RHSDescription">
                 <h2> Rating </h2>
-                <p> Currently not rated</p>
+                {rating}
                 <h2> Description</h2>
                 <ul>
                   <li> <h3> {data.place.showEstablished()}</h3></li>
-                  <li> <h4> Cusine styles include : {data.place.cuisines}</h4></li>
+                  <li> <h3> Cusine styles include : {data.place.cuisines}</h3></li>
                 </ul>
-                <a href={`/places/${data.place.id}/edit`} className="btn btn-warning"> 
-                    Edit {data.place.name}
-                </a>
+                <button className="btn btn-warning descripButton">
+                    <a href={`/places/${data.place.id}/edit`} > 
+                        Edit {data.place.name}
+                    </a>
+                </button>
                 <br/>
                 <form method="POST" action={`/places/${data.place.id}?_method=DELETE`}> 
-                  <button type="submit" className="btn btn-danger">
-                    Delete
+                  <button type="submit" className="btn btn-danger descripButton">
+                    Delete {data.place.name}
                   </button>
               </form> 
      
@@ -57,12 +77,12 @@ function generateShowPage (data) {
               </div>
             </section>
             <section id = "commentsSection">
-              <h2> Comments Section </h2>
-              <section id = "commentSubSection">
+              <h2 className='titleDivider'> Comments Section </h2>
+              <section className = "commentSubSection">
                     {comments}
               </section>
-              <h2> Create A New Comment</h2>
-              <section id = "commentSubSection">
+              <h2 className='titleDivider'> Create A New Comment</h2>
+              <section className = "commentSubSection">
                 <form method='POST' action={`/places/${data.place.id}/comment`}>
                   <div className='form-group'>
                     <label htmlFor='author'>Your Name:</label>

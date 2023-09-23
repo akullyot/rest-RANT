@@ -21,7 +21,7 @@ router.get('/', (request, response) =>
         foundPlaces,
         skeletonData: {
                         title     : 'Rest-RANT:Places',
-                        customCSS : ''
+                        customCSS : '/css/placeIndex.css'
                       }
       });
     });
@@ -51,7 +51,7 @@ router.post('/', (request,response) =>
       response.render('error404' ,{ skeletonData: 
                                     {
                                       title     : 'Rest-RANT:Places',
-                                      customCSS : ''
+                                      customCSS : '/css/placeIndex.css'
                                     }
       });
     });
@@ -127,7 +127,7 @@ router.get('/:id', (request,response) =>
           skeletonData: 
                         {
                             title     : `RestRant: ` + foundPlace.name,
-                            customCSS : ''
+                            customCSS : '/css/placeInfo.css'
                         },
       });
     })
@@ -161,7 +161,7 @@ router.put('/:id', (request,response) => {
     response.render('error404' ,{ skeletonData: 
                                   {
                                     title     : 'Rest-RANT:Places',
-                                    customCSS : ''
+                                    customCSS : '/css/placeIndex.css'
                                   }
     });
   });
@@ -187,7 +187,7 @@ router.get('/:id/edit', (request,response) =>
   })
 });
 
-//Purpose: Insert a comment
+//Purpose: POST a comment, form on the get of /:id
 router.post('/:id/comment', (request, response) => {
 
   request.body.isPositive = request.body.isPositive ? true : false;
